@@ -1,6 +1,7 @@
+function makeFixture (literalCase){
+  return({
+    literalCase
+  });
+}
 
-
-()=>2
-let foo = 1;
-let bar = 1;
-foo === bar;
+makeFixture((v= 1) => "one")

@@ -5,7 +5,6 @@ describe('JS Pattern Matching Plugin', function() {
 
   let transform = (file) => {
     let pluginPath = require.resolve('../src/index.js');
-    console.log(pluginPath);
     let options = {
       presets: ["es2015"],
       plugins: [pluginPath]
@@ -13,14 +12,15 @@ describe('JS Pattern Matching Plugin', function() {
     return babel.transformFileSync(`${__dirname}/${file}`, options);
   }
 
-  context('Blah', () => {
+  let result = eval(transform('fixture.js').code)
 
-    let result = transform('fixture.js')
+  context('Should transform literal value cases', () => {
 
-    console.log(result.code);
+    let literalCase = result.literalCase
 
-    it('should bleh', () => {
-      expect("X").to.equal("X");
+    it('should transform a literal number', () => {
+      expect(literalCase.function()).to.equal("one");
+      expect(literalCase.pattern).to.equal(1);
     });
 
   });
