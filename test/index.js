@@ -4,13 +4,13 @@ import * as babel from 'babel-core';
 describe('JS Pattern Matching Plugin', function() {
 
   let transform = (file) => {
-    let pluginPath = require.resolve('../src');
+    let pluginPath = require.resolve('../src/index.js');
     console.log(pluginPath);
     let options = {
       presets: ["es2015"],
       plugins: [pluginPath]
     };
-    return babel.transformFileSync(`${__dirname}/${file}`, );
+    return babel.transformFileSync(`${__dirname}/${file}`, options);
   }
 
   context('Blah', () => {
