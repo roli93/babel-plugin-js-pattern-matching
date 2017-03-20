@@ -33,8 +33,18 @@ class ArrowFunctionVisitor{
   }
 
   getPattern({ node }){
-    let pattern = node.params[0].right.value.toString()
-    return this.t.stringLiteral(pattern)
+    let pattern;
+    let patternNode = node.params[0].right;
+    switch(patternNode.type){
+      case 'NumericLiteral': case 'StringLiteral': case 'BooleanLiteral':
+        pattern = patternNode.value; break;
+      case 'Identifier':
+        pattern = patternNode.name; break;
+      case 'NullLiteral':
+        pattern = null; break;
+      default: break;
+    }
+    return this.t.stringLiteral(String(pattern))
   }
 
 }

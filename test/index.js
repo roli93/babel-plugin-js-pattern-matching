@@ -16,11 +16,43 @@ describe('JS Pattern Matching Plugin', function() {
 
   context('Should transform literal value cases', () => {
 
-    let literalCase = result.literalCase
+    let {
+      numberCase,
+      stringCase,
+      nullCase,
+      undefinedCase,
+      boolCase,
+      NaNCase
+    } = result
 
     it('should transform a literal number', () => {
-      expect(literalCase.function()).to.equal("one");
-      expect(literalCase.pattern).to.equal("1");
+      expect(numberCase.function()).to.equal("number");
+      expect(numberCase.pattern).to.equal("1");
+    });
+
+    it('should transform a literal string', () => {
+      expect(stringCase.function()).to.equal("string");
+      expect(stringCase.pattern).to.equal("three");
+    });
+
+    it('should transform a literal null', () => {
+      expect(nullCase.function()).to.equal("null constant");
+      expect(nullCase.pattern).to.equal("null");
+    });
+
+    it('should transform a literal undefined', () => {
+      expect(undefinedCase.function()).to.equal("undefined constant");
+      expect(undefinedCase.pattern).to.equal("undefined");
+    });
+
+    it('should transform a literal boolean', () => {
+      expect(boolCase.function()).to.equal("boolean");
+      expect(boolCase.pattern).to.equal("true");
+    });
+
+    it('should transform a literal NaN ', () => {
+      expect(NaNCase.function()).to.equal("NaN constant");
+      expect(NaNCase.pattern).to.equal("NaN");
     });
 
   });
