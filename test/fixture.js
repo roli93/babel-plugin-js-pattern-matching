@@ -4,4 +4,4 @@ function makeFixture (literalCase){
   });
 }
 
-makeFixture((v= 1) => "one")
+makeFixture((v= 1) => "one") //we force using them as function params to simulate real usage

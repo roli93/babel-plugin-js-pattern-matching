@@ -20,7 +20,7 @@ describe('JS Pattern Matching Plugin', function() {
 
     it('should transform a literal number', () => {
       expect(literalCase.function()).to.equal("one");
-      expect(literalCase.pattern).to.equal(1);
+      expect(literalCase.pattern).to.equal("1");
     });
 
   });

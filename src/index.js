@@ -32,8 +32,9 @@ class ArrowFunctionVisitor{
     return this.t.arrowFunctionExpression([this.t.identifier("value")], node.body)
   }
 
-  getPattern(path){
-    return this.t.numericLiteral(3) //TODO
+  getPattern({ node }){
+    let pattern = node.params[0].right.value.toString()
+    return this.t.stringLiteral(pattern)
   }
 
 }
