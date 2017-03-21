@@ -101,5 +101,30 @@ describe('JS Pattern Matching Plugin', function() {
 
   });
 
+  context('Should transform Class cases', () => {
+
+    let {
+      emptyArrayCase,
+      trivialArrayCase,
+      spreadArrayCase
+    } = getFileCode('arraysFixture.js')
+
+    it('should transform an empty array case', () => {
+      expect(emptyArrayCase.function([])).to.equal(0);
+      expect(emptyArrayCase.pattern).to.equal("[]");
+    });
+
+    it('should transform a one-element trivial array case', () => {
+      expect(trivialArrayCase.function([1])).to.equal(1);
+      expect(trivialArrayCase.pattern).to.equal("[x]");
+    });
+
+    it('should transform a array with spread case', () => {
+      expect(spreadArrayCase.function([1,2,3])).to.equal("head: 1, tail: [2,3]");
+      expect(spreadArrayCase.pattern).to.equal("[x,...xs]");
+    });
+
+  });
+
 
 });

@@ -40,6 +40,20 @@ class ArrowFunctionVisitor{
     return firstParamNode.type === 'AssignmentPattern'? firstParamNode.right: firstParamNode;
   }
 
+  getArrayPattern(arrayPatternNode){
+    return `[${arrayPatternNode.elements.map( element => this.getPatternFor(element) )}]`
+  }
+
+  getPatternFor(arrayElementNode){
+    let arrayElementPattern
+    switch(arrayElementNode.type){
+      case 'Identifier':
+        arrayElementPattern = arrayElementNode.name; break;
+      default: break;
+    }
+    return arrayElementPattern;
+  }
+
   getPattern(path){
     let pattern;
     let patternNode = this.getPatternNode(path)
@@ -51,6 +65,8 @@ class ArrowFunctionVisitor{
         pattern = patternNode.name; break;
       case 'NullLiteral':
         pattern = null; break;
+      case 'ArrayPattern':
+        pattern = this.getArrayPattern(patternNode); break;
       default: break;
     }
     return this.t.stringLiteral(String(pattern))
