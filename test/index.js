@@ -9,7 +9,7 @@ describe('JS Pattern Matching Plugin', function() {
       presets: ["es2015"],
       plugins: [pluginPath]
     };
-    return babel.transformFileSync(`${__dirname}/${file}`, options);
+    return babel.transformFileSync(`${__dirname}/fixtures/${file}`, options);
   }
 
   const getFileCode = (filename) => eval(transform(filename).code)
