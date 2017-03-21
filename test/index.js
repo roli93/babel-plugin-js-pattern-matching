@@ -74,6 +74,20 @@ describe('JS Pattern Matching Plugin', function() {
       expect(annonVariableCase.pattern).to.equal("_");
     });
 
+  });
+
+  context('Should transform Class cases', () => {
+
+    let {
+      classCase,
+      bindingClassCase,
+      destructuringClassCase
+    } = getFileCode('variablesFixture.js')
+
+    it('should transform a simple class case', () => {
+      expect(classCase.function()).to.equal("An EvalError");
+      expect(classCase.pattern).to.equal("EvalError");
+    });
 
   });
 
