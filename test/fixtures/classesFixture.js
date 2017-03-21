@@ -11,7 +11,7 @@ function makeFixture (
 }
 
 makeFixture(
-  (EvalError) => "EvalError",
+  (EvalError) => "An EvalError",
   (e = ReferenceError) => e.message,
   ({ message } = SyntaxError) => message+"!",
 ) //we force using them as function params to simulate real usage

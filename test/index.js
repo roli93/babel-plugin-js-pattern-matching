@@ -82,11 +82,21 @@ describe('JS Pattern Matching Plugin', function() {
       classCase,
       bindingClassCase,
       destructuringClassCase
-    } = getFileCode('variablesFixture.js')
+    } = getFileCode('classesFixture.js')
 
     it('should transform a simple class case', () => {
       expect(classCase.function()).to.equal("An EvalError");
       expect(classCase.pattern).to.equal("EvalError");
+    });
+
+    it('should transform a binding class case', () => {
+      expect(bindingClassCase.function(new ReferenceError("msg"))).to.equal("msg");
+      expect(bindingClassCase.pattern).to.equal("ReferenceError");
+    });
+
+    it('should transform a destructuring class case', () => {
+      expect(destructuringClassCase.function(new SyntaxError("msg"))).to.equal("msg!");
+      expect(destructuringClassCase.pattern).to.equal("SyntaxError");
     });
 
   });
