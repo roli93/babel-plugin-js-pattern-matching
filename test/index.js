@@ -3,7 +3,7 @@ import * as babel from 'babel-core';
 
 describe('JS Pattern Matching Plugin', function() {
 
-  let transform = (file) => {
+  const transform = (file) => {
     let pluginPath = require.resolve('../src/index.js');
     let options = {
       presets: ["es2015"],
@@ -12,7 +12,7 @@ describe('JS Pattern Matching Plugin', function() {
     return babel.transformFileSync(`${__dirname}/${file}`, options);
   }
 
-  let result = eval(transform('fixture.js').code)
+  const getFileCode = (filename) => eval(transform(filename).code)
 
   context('Should transform literal value cases', () => {
 
@@ -23,7 +23,7 @@ describe('JS Pattern Matching Plugin', function() {
       undefinedCase,
       boolCase,
       NaNCase
-    } = result
+    } = getFileCode('literalsFixture.js')
 
     it('should transform a literal number', () => {
       expect(numberCase.function()).to.equal("number");
@@ -54,6 +54,26 @@ describe('JS Pattern Matching Plugin', function() {
       expect(NaNCase.function()).to.equal("NaN constant");
       expect(NaNCase.pattern).to.equal("NaN");
     });
+
+  });
+
+  context('Should transform variable cases', () => {
+
+    let {
+      variableCase,
+      annonVariableCase
+    } = getFileCode('variablesFixture.js')
+
+    it('should transform a variable case', () => {
+      expect(variableCase.function("a")).to.equal("a!");
+      expect(variableCase.pattern).to.equal("whatever");
+    });
+
+    it('should transform an annonymous variable case', () => {
+      expect(annonVariableCase.function("a")).to.equal("anon");
+      expect(annonVariableCase.pattern).to.equal("_");
+    });
+
 
   });
 

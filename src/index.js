@@ -28,13 +28,30 @@ class ArrowFunctionVisitor{
     return this.t.isObjectProperty(path.parent)
   }
 
-  getFunction({ node }){
-    return this.t.arrowFunctionExpression([this.t.identifier("value")], node.body)
+  getFunction(path){
+    return this.t.arrowFunctionExpression(
+      [this.t.identifier(this.getParameterNode(path).name)],
+      path.node.body
+    )
   }
 
-  getPattern({ node }){
+  getWithoutAssignement({ node }, side){
+    let firstParamNode = node.params[0];
+    return firstParamNode.type === 'AssignmentPattern'? firstParamNode[side]: firstParamNode;
+  }
+
+  getParameterNode(path){
+    return this.getWithoutAssignement(path, 'left')
+  }
+
+  getPatternNode(path){
+    return this.getWithoutAssignement(path, 'right')
+  }
+
+  getPattern(path){
     let pattern;
-    let patternNode = node.params[0].right;
+    let patternNode = this.getPatternNode(path)
+
     switch(patternNode.type){
       case 'NumericLiteral': case 'StringLiteral': case 'BooleanLiteral':
         pattern = patternNode.value; break;
