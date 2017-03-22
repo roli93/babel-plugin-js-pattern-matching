@@ -14,7 +14,7 @@ class ArrowFunctionVisitor{
   }
 
   visit(path){
-    if(this.isTransformed(path)) return; //To avoid recursive trasnformation
+    if(this.isTransformed(path) || !this.isAMatchCase(path)) return;
 
     let object = this.t.objectExpression([
       this.t.objectProperty(this.t.identifier("function"), this.getFunction(path)),
@@ -26,6 +26,18 @@ class ArrowFunctionVisitor{
 
   isTransformed(path){
     return this.t.isObjectProperty(path.parent)
+  }
+
+  isAMatchCase({ parent }){
+    return parent.type === 'CallExpression' && this.isCallingMatch(parent.callee);
+  }
+
+  isCallingMatch(node){
+    return this.isMatch(node) || this.isCallingMatch(node.callee);
+  }
+
+  isMatch(node){
+    return node.type === 'Identifier' && node.name === 'match'
   }
 
   getFunction(path){
@@ -49,6 +61,8 @@ class ArrowFunctionVisitor{
     switch(arrayElementNode.type){
       case 'Identifier':
         arrayElementPattern = arrayElementNode.name; break;
+      case 'RestElement':
+        arrayElementPattern = `...${arrayElementNode.argument.name}`; break;
       default: break;
     }
     return arrayElementPattern;

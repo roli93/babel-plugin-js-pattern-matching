@@ -101,7 +101,7 @@ describe('JS Pattern Matching Plugin', function() {
 
   });
 
-  context('Should transform Class cases', () => {
+  context('Should transform Array cases', () => {
 
     let {
       emptyArrayCase,
@@ -120,8 +120,21 @@ describe('JS Pattern Matching Plugin', function() {
     });
 
     it('should transform a array with spread case', () => {
-      expect(spreadArrayCase.function([1,2,3])).to.equal("head: 1, tail: [2,3]");
+      expect(spreadArrayCase.function([1,2,3])).to.equal("head: 1, tail: 2,3");
       expect(spreadArrayCase.pattern).to.equal("[x,...xs]");
+    });
+
+  });
+
+  context('Should transform only closures used in match statements', () => {
+
+    let {
+      nonCaseFunction
+    } = getFileCode('arraysFixture.js')
+
+    it('should leave closures in other cases untransofrmed', () => {
+      expect(nonCaseFunction("hi")).to.equal("hi!");
+      expect(typeof nonCaseFunction).to.equal('function')
     });
 
   });

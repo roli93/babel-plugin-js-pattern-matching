@@ -16,7 +16,9 @@ function makeFixture (
   });
 }
 
-makeFixture(
+function match(){ return makeFixture; }  //We use the name match as transformation is restricted only for it
+
+match () (
   (v= 1) => "number",
   (v= "three") => "string",
   (v= null) => "null constant",
