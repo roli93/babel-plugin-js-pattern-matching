@@ -130,7 +130,7 @@ describe('JS Pattern Matching Plugin', function() {
 
     let {
       nonCaseFunction
-    } = getFileCode('arraysFixture.js')
+    } = getFileCode('scopeActionFixture.js')
 
     it('should leave closures in other cases untransofrmed', () => {
       expect(nonCaseFunction("hi")).to.equal("hi!");

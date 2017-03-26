@@ -14,7 +14,7 @@ class ArrowFunctionVisitor{
   }
 
   visit(path){
-    if(this.isTransformed(path) || !this.isAMatchCase(path)) return;
+    if(this.isTransformed(path) || !this.isAMatchCase(path.parent)) return;
 
     let object = this.t.objectExpression([
       this.t.objectProperty(this.t.identifier("function"), this.getFunction(path)),
@@ -28,12 +28,12 @@ class ArrowFunctionVisitor{
     return this.t.isObjectProperty(path.parent)
   }
 
-  isAMatchCase({ parent }){
-    return parent.type === 'CallExpression' && this.isCallingMatch(parent.callee);
-  }
-
-  isCallingMatch(node){
-    return this.isMatch(node) || this.isCallingMatch(node.callee);
+  isAMatchCase(node){
+    return node.type === 'CallExpression' &&
+    (
+      this.isMatch(node.callee) ||
+      this.isAMatchCase(node.callee)
+    );
   }
 
   isMatch(node){
