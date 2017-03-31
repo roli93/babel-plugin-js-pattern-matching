@@ -32,7 +32,7 @@ describe('JS Pattern Matching Plugin', function() {
 
     it('should transform a literal string', () => {
       expect(stringCase.function()).to.equal("string");
-      expect(stringCase.pattern).to.equal("three");
+      expect(stringCase.pattern).to.equal("\"three\"");
     });
 
     it('should transform a literal null', () => {
