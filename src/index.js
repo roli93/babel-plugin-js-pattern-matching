@@ -73,8 +73,10 @@ class ArrowFunctionVisitor{
     let patternNode = this.getPatternNode(path)
 
     switch(patternNode.type){
-      case 'NumericLiteral': case 'StringLiteral': case 'BooleanLiteral':
+      case 'NumericLiteral': case 'BooleanLiteral':
         pattern = patternNode.value; break;
+      case 'StringLiteral':
+        pattern = `"${patternNode.value}"`; break;
       case 'Identifier':
         pattern = patternNode.name; break;
       case 'NullLiteral':
