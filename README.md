@@ -43,4 +43,4 @@ To use [JS-Pattern-Matching](https://www.npmjs.com/package/js-pattern-matching) 
 Important note about usage
 --------------------------
 
-The plugin currently relies on the `match` function being imported and used with that name. If you import it using another name, it will probably not work. We are planning to include the possibility to parametrize this in the next release.
+The plugin currently relies on the `match` function being imported and used with that name. If you import it using another name, it will probably not work. Support for custom names is planned for the next release.
