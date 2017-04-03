@@ -24,7 +24,7 @@ Installation
 ====================
 
 ```
-npm install --save babel-plugin-js-pattern-matching
+npm install --save-dev babel-plugin-js-pattern-matching
 ```
 
 To use the plugin, first install it with the above command.
