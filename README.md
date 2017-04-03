@@ -1,3 +1,6 @@
+[![Build Status](https://api.travis-ci.org/roli93/babel-plugin-js-pattern-matching.svg?branch=master) ]( https://travis-ci.org/roli93/babel-plugin-js-pattern-matching)
+[![Dependency Status](https://david-dm.org/roli93/babel-plugin-js-pattern-matching.svg)](https://david-dm.org/roli93/babel-plugin-js-pattern-matching)
+[![devDependencies Status](https://david-dm.org/roli93/babel-plugin-js-pattern-matching/dev-status.svg)](https://david-dm.org/roli93/babel-plugin-js-pattern-matching?type=dev)
 
 Babel Plugin for JS-Pattern-Matching
 ====================
